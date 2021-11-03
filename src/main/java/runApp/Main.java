@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Class.forName("GoogleDriveUser");
-            AbstractUser user = UserManager.getUser();
+            AbstractUser user = UserManager.getUser("ntadic4419rn","myPassword");
 
             Scanner sc = new Scanner(System.in);
             while(true){
