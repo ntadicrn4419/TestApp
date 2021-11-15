@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             Class.forName("GoogleDriveUser");
-            AbstractUser user = UserManager.getUser("ntadic4419rn","myPassword");
-
+            AbstractUser user = UserManager.getUser("ntadic4419rn","myPassword", null);//treci argument je currentActiveStorage koji
+                                                                                                                //na pocetku nije setovan
             Scanner sc = new Scanner(System.in);
             while(true){
                 System.out.println("Za kreiranje skladista unesite broj 1: ");
