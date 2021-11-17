@@ -10,29 +10,49 @@ public class Main {
     public static void main(String[] args) {
         try {
             Class.forName("GoogleDriveUser");
-            AbstractUser user = UserManager.getUser("ntadic4419rn","myPassword", null);//treci argument je currentActiveStorage koji
-                                                                                                                //na pocetku nije setovan
-            Scanner sc = new Scanner(System.in);
-            while(true){
-                System.out.println("Za kreiranje skladista unesite broj 1: ");
-                System.out.println("Za izlazak iz programa unesite broj 2: ");
-                String input = sc.nextLine();
-                if(input.equalsIgnoreCase("1")){
-                    System.out.println("Unesite naziv za novo skladiste: ");
-                    String name = sc.nextLine();
-                    user.initStorage(name, "random string koji za sad nicemu ne sluzi");
-
-                }else{
-                    if(input.equalsIgnoreCase("2")){
-                        System.out.println("Kraj programa.");
-                        return;
-                    }else{
-                        System.out.println("Uneli ste nesto drugo, tako da nista se ne desava.");
-                    }
-                }
-            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        if(args.length < 1){
+        System.out.println("Niste uneli putanju skladista.");
+             return;
+        }
+        String storagePath = args[0];
+        AbstractUser user = UserManager.getUser();
+        user.initStorage(storagePath);
+
+        Scanner sc = new Scanner(System.in);
+        int br;
+        while(true){
+            printOptions();
+            br = sc.nextInt();
+            switch (br){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+            }
+        }
+
+    }
+    public static void printOptions(){
+
     }
 }
