@@ -20,9 +20,19 @@
         </dependency>
         <dependency>
             <groupId>softverske-komponente</groupId>
+            <artifactId>LocalImpl</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>softverske-komponente</groupId>
             <artifactId>sk-specification</artifactId>
             <version>1.0-SNAPSHOT</version>
 <!--            <scope>compile</scope> compile time dependency is default, but i wanted to underline that!-->
+        </dependency>
+        <dependency>
+            <groupId>softverske-komponente</groupId>
+            <artifactId>LocalImpl</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
