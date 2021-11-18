@@ -1,9 +1,11 @@
 package runApp;
 
 import storageSpec.AbstractUser;
+import storageSpec.Privilege;
 import storageSpec.UserManager;
 
 import java.io.InputStreamReader;
+import java.time.DateTimeException;
 import java.util.*;
 
 public class Main {
@@ -64,6 +66,15 @@ public class Main {
             br = sc.nextInt();
             switch (br){
                 case 1:
+                    System.out.println("Enter path of file you want download: ");
+                    String fileToDownload = userInput.nextLine();
+                    System.out.println("Enter location where to download: ");
+                    String whereToDownload = userInput.nextLine();
+                    message = user.download(fileToDownload, whereToDownload);
+                    if(message == 1)
+                        System.out.println("Successfully downloaded");
+                    else
+                        System.out.println("Error while downloading");
                     break;
                 case 2:
                     System.out.println("New dir name: ");
@@ -166,6 +177,13 @@ public class Main {
                     }
                     break;
                 case 11:
+                    System.out.println("Enter name of the file you are searching for: ");
+                    filePath = userInput.nextLine();
+                    coll = user.searchByName(filePath);
+                    System.out.println("Found: ");
+                    for(String c: coll){
+                        System.out.println(c);
+                    }
                     break;
                 case 12:
                     System.out.println("Enter directory path: ");
@@ -206,8 +224,40 @@ public class Main {
                     System.out.println(path + "has been created:  " + creationDate);
                     break;
                 case 16:
+                    System.out.println("Enter first creation date: year month day hour minute(with space in between)");
+                    System.out.println("yyyy mm dd hh mm");
+                    input = userInput.nextLine();
+                    String array[] = input.split(" ");
+                    Date date1 = new Date(Integer.valueOf(array[0]), Integer.valueOf(array[1]), Integer.valueOf(array[2]), Integer.valueOf(array[3]), Integer.valueOf(array[4]));
+
+                    System.out.println("Enter second creation date: year month day hour minute(with space in between)");
+                    System.out.println("yyyy mm dd hh mm");
+                    input = userInput.nextLine();
+                    array = input.split(" ");
+                    Date date2 = new Date(Integer.valueOf(array[0]), Integer.valueOf(array[1]), Integer.valueOf(array[2]), Integer.valueOf(array[3]), Integer.valueOf(array[4]));
+                    coll = user.searchByDateCreationRange(date1, date2);
+                    for(String c: coll){
+                        System.out.println(c);
+                    }
                     break;
                 case 17:
+                    System.out.println("Enter dirPath: ");
+                    dirPath = userInput.nextLine();
+                    System.out.println("Enter first creation date: year month day hour minute(with space in between)");
+                    System.out.println("yyyy mm dd hh mm");
+                    input = userInput.nextLine();
+                    array = input.split(" ");
+                    date1 = new Date(Integer.valueOf(array[0]), Integer.valueOf(array[1]), Integer.valueOf(array[2]), Integer.valueOf(array[3]), Integer.valueOf(array[4]));
+
+                    System.out.println("Enter second creation date: year month day hour minute(with space in between)");
+                    System.out.println("yyyy mm dd hh mm");
+                    input = userInput.nextLine();
+                    array = input.split(" ");
+                    date2 = new Date(Integer.valueOf(array[0]), Integer.valueOf(array[1]), Integer.valueOf(array[2]), Integer.valueOf(array[3]), Integer.valueOf(array[4]));
+                    coll = user.searchFilesInDirByDateCreationRange(date1, date2, dirPath);
+                    for(String c: coll){
+                        System.out.println(c);
+                    }
                     break;
                 case 18:
                     System.out.println("Enter storage size in bytes: ");
@@ -244,9 +294,27 @@ public class Main {
                     }
                     break;
                 case 21:
-
+                    System.out.println("Enter username password privilege(separated by space)");
+                    System.out.println("Privilege options: READ, DOWNLOAD, UPLOAD, DELETE");
+                    input = userInput.nextLine();
+                    array = input.split(" ");
+                    Privilege p = Privilege.valueOf(array[2]);
+                    message = user.addUser(array[0], array[1], p);
+                    if(message == 1){
+                        System.out.println("User added successfully");
+                    }else{
+                        System.out.println("Error while adding user");
+                    }
                     break;
                 case 22:
+                    System.out.println("Enter username of user you want to remove: ");
+                    input = userInput.nextLine();
+                    message = user.removeUser(input);
+                    if(message == 1){
+                        System.out.println("User removed successfully");
+                    }else{
+                        System.out.println("Error while removing user");
+                    }
                     break;
                 case 0:
                     System.out.println("End of program");
@@ -260,7 +328,7 @@ public class Main {
     }
     public static void printOptions(){
         System.out.println("Choose operation number: ");
-        System.out.println("1. saveStorageData");
+        System.out.println("1. download");
         System.out.println("2. createDir");
         System.out.println("3. create multiple Dir");
         System.out.println("4. createFile");
